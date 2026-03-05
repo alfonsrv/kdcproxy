@@ -49,7 +49,7 @@ authors = {
 }
 setup(
     name="kdcproxy",
-    version="1.0.0",
+    version="1.1.0",
     author=", ".join(authors.keys()),
     author_email=", ".join(authors.values()),
     description=("A kerberos KDC HTTP proxy WSGI module."),
@@ -64,7 +64,6 @@ setup(
         "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
         "Intended Audience :: System Administrators",
-        "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.8",
