@@ -11,10 +11,13 @@ services:
       - "443:443"
     environment:
       - KDCPROXY_CONFIG=/config/kdcproxy.conf
-      - SERVER_NAME=${SERVER_NAME:-selfsign.rausys.de}
+      - SERVER_NAME=${SERVER_NAME}
     volumes:
       - config:/config:ro
       - certs:/certs:ro
+    depends_on:
+      omgwtfssl:
+        condition: service_completed_successfully
     extra_hosts:
       - "test-dc1.contoso.loc:10.10.10.10"
 
@@ -25,7 +28,7 @@ services:
     volumes:
       - certs:/certs
     environment:
-      - SSL_SUBJECT=${SERVER_NAME:-selfsign.rausys.de}
+      - SSL_SUBJECT=${SERVER_NAME}
       - SSL_KEY=/certs/cert.key
       - SSL_CSR=/certs/cert.csr
       - SSL_CERT=/certs/cert.crt

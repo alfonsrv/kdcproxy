@@ -22,8 +22,8 @@ COPY config/kdc-wsgi.conf ${APACHE_CONFDIR}/sites-available/
 # Download + install kdcproxy and get install path to replace in apache config
 RUN git clone https://github.com/latchset/kdcproxy.git /tmp/kdcproxy \
     && pip install /tmp/kdcproxy \
-    && KDC_PROXY_PATH=$(python -c "import site; print(site.getsitepackages()[0])")/kdcproxy \
-    && sed -ri -e "s!KDC_PROXY_PATH!${KDC_PROXY_PATH}!g" /etc/apache2/sites-available/*.conf \
+    && SITE_PACKAGES_PATH=$(python -c "import site; print(site.getsitepackages()[0])") \
+    && sed -ri -e "s!SITE_PACKAGES_PATH!${SITE_PACKAGES_PATH}!g" /etc/apache2/sites-available/*.conf \
     && sed -ri -e "s!SERVER_NAME!${SERVER_NAME}!g" /etc/apache2/sites-available/*.conf
 
 RUN a2dissite 000-default.conf \
